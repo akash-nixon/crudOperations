@@ -1,8 +1,11 @@
 package com.testsigma.crud.controller;
 
 import com.testsigma.crud.entity.Product;
+import com.testsigma.crud.repository.productRepository;
 import com.testsigma.crud.service.productService;
+import com.testsigma.crud.specification.productSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
 public class productController {
     @Autowired
     private productService productService;
+    @Autowired
+    private productRepository productRepository;
     @PostMapping("/add")
     public Product addProduct(@RequestBody Product product){
         return productService.saveProduct(product);
@@ -41,4 +46,9 @@ public class productController {
         return productService.deleteProduct(id);
     }
 
+    @GetMapping("/search")
+    public List<Product> list(@RequestParam(value = "name",required = false)String name){
+        Specification<Product> specification = productSpecification.getSpec(name);
+        return productRepository.findAll(specification);
+    }
 }
