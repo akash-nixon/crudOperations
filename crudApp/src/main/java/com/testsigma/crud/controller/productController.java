@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:4200/")
 public class productController {
     @Autowired
     private productService productService;
@@ -25,6 +26,7 @@ public class productController {
         return productService.bulkSave(products);
     }
     @GetMapping("/products")
+    @CrossOrigin("http://localhost:4200/")
     public List<Product> findAll(){
         return productService.bulkGet();
     }
