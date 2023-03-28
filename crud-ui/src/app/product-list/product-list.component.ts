@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class ProductListComponent implements OnInit{
   products: Product[] | undefined;
+  keyword: String | undefined;
 
   constructor(private productService: ProductService,
               private router:Router) {
@@ -31,6 +32,14 @@ export class ProductListComponent implements OnInit{
     this.productService.deleteProduct(id).subscribe(res =>{
       console.log(res);
       this.getProducts();
+    })
+  }
+
+
+  search(name: String|undefined) {
+    this.productService.searchProduct(name).subscribe(data =>{
+      this.products = data;
+
     })
   }
 }

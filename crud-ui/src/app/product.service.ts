@@ -30,4 +30,8 @@ export class ProductService {
   deleteProduct(id:number|undefined):Observable<Object>{
     return this.httpClient.delete(`http://localhost:8080/delete/${id}`,{responseType:'text'});
   }
+
+  searchProduct(name:String|undefined):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/search?name=${name}`);
+  }
 }

@@ -1,5 +1,11 @@
-<h2 class="text-center">Product List</h2>
-<table class="table table-striped">
+<h2 class="text-center" xmlns:th="http://www.w3.org/1999/xhtml">Product List</h2>
+<div class="form-group mx-sm-3 mb-2">
+<form th:action="@{/search}" class="text-center">
+<input type="text" name="name" [(ngModel)]="keyword" style="height: 38px">
+<button class="btn btn-dark" style="margin-left: 10px" (click)="search(keyword)"> search</button>
+</form>
+</div>
+<table class="table table-hover">
   <thead>
   <tr>
     <th>Name</th>
@@ -14,8 +20,8 @@
     <td>{{product.quantity}}</td>
     <td>{{product.price}}</td>
     <td>
-      <button (click)="updateProduct(product.id)" class="btn btn-info">Update</button>
-      <button (click)="deleteProduct(product.id)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
+      <button (click)="updateProduct(product.id)" class="btn btn-outline-dark">Update</button>
+      <button (click)="deleteProduct(product.id)" class="btn btn-outline-danger" style="margin-left: 10px">Delete</button>
     </td>
   </tr>
   </tbody>
