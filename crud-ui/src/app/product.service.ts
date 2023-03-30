@@ -34,4 +34,28 @@ export class ProductService {
   searchProduct(name:String|undefined):Observable<Product[]>{
     return this.httpClient.get<Product[]>(`http://localhost:8080/search?name=${name}`);
   }
+
+  sortProduct(field:String,order:Boolean):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/products/${field}/${order}`);
+  }
+
+  paginationProduct(pageNo:number|undefined,pageSize:number|undefined):Observable<Product>{
+    return this.httpClient.get<Product>(`http://localhost:8080/pagination/${pageNo}/${pageSize}`);
+  }
+
+  quanLess(quan:number|undefined):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/quanLess?quantity=${quan}`);
+  }
+
+  quanMore(quan:number|undefined):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/quanMore?quantity=${quan}`);
+  }
+
+  priceLess(price:number|undefined):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/priceLess?price=${price}`);
+  }
+
+  priceMore(price:number|undefined):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`http://localhost:8080/priceMore?price=${price}`);
+  }
 }

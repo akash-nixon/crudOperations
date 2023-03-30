@@ -3,8 +3,10 @@ package com.testsigma.crud.service;
 import com.testsigma.crud.entity.Product;
 import com.testsigma.crud.repository.productRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -43,5 +45,12 @@ public class productService {
         existProduct.setQuantity(product.getQuantity());
         existProduct.setPrice(product.getPrice());
         return productRepository.save(existProduct);
+    }
+
+    public List<Product> sort(String field, Boolean order){
+        if(order)
+            return productRepository.findAll(Sort.by(Sort.Direction.ASC,field));
+        else
+            return productRepository.findAll(Sort.by(Sort.Direction.DESC,field));
     }
 }
